@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django_Form</title>
+</head>
+
+<body>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <h2>
+            Form Get
+        </h2>
+        <input type="text" name="mesaj">
+        <input type="submit" value="Gönder">
+    </form>
+    <div>
+
+        {% if gelen_mesaj %}
+
+
+
+        <h2>Mesaj</h2>
+        <p>
+            {{ gelen_mesaj }}
+        </p>
+        {% endif %}
+    </div>
+
+</body>
+
+</html>

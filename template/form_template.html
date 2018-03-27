@@ -1,0 +1,17 @@
+{{ form.media }}
+{% for field in form %}
+    <div class="form-group">
+        {{ field.label_tag }}
+        {{ field }}
+        {% if field.errors %}
+            <br>
+            <b>{{ field.errors }}</b>
+        {% endif %}
+        <br>
+        {% if field.help_text %}
+            {{ field.help_text|safe }}
+        {% endif %}
+    </div>
+{% endfor %}
+
+

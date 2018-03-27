@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% block for_upload_js %}
+    <script>
+        $(document).ready(function () {
+            $('.show-comment').click(function (e) {
+                e.preventDefault();
+                $(this).parent().parent().children('.comment-child').slideToggle('slow');
+
+            });
+
+            $('.answer').click(function (e) {
+                e.preventDefault();
+                $(this).parent().parent().children('.comment-answer').slideToggle('slow')
+            })
+
+        });
+
+    </script>
+{% endblock %}
+{% block content %}
+
+  {% include 'post/post_template.html' %}
+
+
+{#    <div class="col-lg-12">#}
+{#        <h2 class="page-header">#}
+{#            {% if post_list.comment.all %}#}
+{#                Yorumlar ({{ post_list.comment.all|length }})#}
+{#                </h2>#}
+{#                {% for comment in post_list.comment.all %}#}
+{#                    <div class="col-lg-2">#}
+{#                        <img style="width: 60px; height: 60px;"#}
+{#                             src="{{ comment.user.profile.profile_photo.url }}"#}
+{#                             class="img-responsive img-circle">#}
+{#                    </div>#}
+{#                    <div class="col-lg-10">#}
+{#                        <p class=""> {{ comment.user.get_full_name }}&nbsp;#}
+{#                            <small>{{ comment.date|timesince }}</small>#}
+{#                            önce#}
+{#                        </p>#}
+{##}
+{#                        <p class="">#}
+{#                            {{ comment.c_content }}#}
+{#                        </p>#}
+{#                        <p>#}
+{#                            {% if comment.comment_child.all %}#}
+{#                                <a class="show-comment"#}
+{#                                   href="#">Göster {{ comment.comment_child.all|length }}</a>#}
+{#                            {% endif %}#}
+{##}
+{#                            <a class="answer" href="#">Yanıtla</a>#}
+{#                        </p>#}
+{##}
+{#                        <div class="comment-answer" style="display: none">#}
+{##}
+{#                            <form method="POST" action="{% url 'add_child_comment' comment.id %}">#}
+{#                                {% csrf_token %}#}
+{#                                {% include 'form_template.html' %}#}
+{#                                <input type="submit" class="btn btn-success" value="Yorum Yap">#}
+{#                            </form>#}
+{##}
+{#                        </div>#}
+{##}
+{##}
+{#                        <div class="comment-child" style="display: none">#}
+{#                            {% for child_commnet in comment.comment_child.all %}#}
+{#                                <div class="col-lg-12">#}
+{#                                    <div class="row">#}
+{#                                        <div class="col-lg-2">#}
+{#                                            <br>#}
+{#                                            <img style="height: 60px; width: 60px;"#}
+{#                                                 src="{{ child_commnet.user.profile.profile_photo.url }}"#}
+{#                                                 class="img-responsive img-circle">#}
+{#                                        </div>#}
+{#                                        <div class="clear"></div>#}
+{#                                        <div class="col-lg-10">#}
+{#                                            <br>#}
+{#                                            <p class="lead">{{ child_commnet.user }}#}
+{#                                                <small>{{ child_commnet.date }}</small>#}
+{#                                            </p>#}
+{#                                            <p>#}
+{#                                                {{ child_commnet.content }}#}
+{#                                            </p>#}
+{##}
+{##}
+{#                                        </div>#}
+{#                                        <br>#}
+{#                                    </div>#}
+{#                                    <br>#}
+{#                                </div>#}
+{#                            {% endfor %}#}
+{#                        </div>#}
+{##}
+{#                        <hr>#}
+{#                    </div>#}
+{#                {% endfor %}#}
+{#            {% else %}#}
+{#                <p class="head">#}
+{#                    Henüz Yorum Yok#}
+{#                </p>#}
+{#            {% endif %}#}
+{#    </div>#}
+
+
+    <div class="row">
+        <form method="POST">
+            {% csrf_token %}
+            {% include 'form_template.html' %}
+            <input type="submit" class="btn btn-success" value="Yorum Yap">
+        </form>
+    </div>
+
+{% endblock %}

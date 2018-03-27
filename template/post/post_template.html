@@ -1,0 +1,34 @@
+<div class="col-lg-8 col-lg-offset-2">
+    {% for post in post_list %}
+        <div class="">
+            <h2>
+                <a href="{% url 'posts_detail' post.slug %}">
+                    {{ post.title|upper }}</a>
+                <small>{{ post.created_date|timesince }}</small>
+                {% if post.draft %}
+                    <small style="color: red;">Draft</small>
+                {% endif %}
+            </h2>
+            {% if post.img %}
+                <img src="{{ post.get_image }}" class="img-responsive">
+                <hr>
+            {% endif %}
+            <p>
+                {{ post.content|safe|truncatewords_html:100 }}
+            </p>
+            <p style="font-size: 25px">Writer :
+                <a href="{% url 'user_profile' post.user.username %}">{{ post.user.get_full_name }}</a></p>
+            <form action="{% url 'posts_delete' post.slug %}" class="form-group" method="POST">
+                {% csrf_token %}
+                <a class="btn btn-info" href="{% url 'posts_detail' post.slug %}">Detail</a>
+                {% if request.user == post.user %}
+                    <input type="submit" value="Delete" class="btn btn-danger">
+                {% endif %}
+                            <a href="#" id="like-button" class="btn btn-default"></a>
+            </form>
+            <hr>
+        </div>
+
+
+    {% endfor %}
+</div>
